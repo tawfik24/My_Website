@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المرجع الشامل للمدرب - الأستاذ توفيق كنوش</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+    body { background: #0b1325; color: #fff; min-height: 100vh; padding: 25px 15px; display: flex; justify-content: center; }
+    
+    .doc-container { width: 100%; max-width: 1100px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 24px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.85); backdrop-filter: blur(12px); }
+    
+    /* Header & Branding */
+    .header-branding { padding: 20px 35px; background: rgba(0, 0, 0, 0.45); border-bottom: 1px solid rgba(212, 175, 55, 0.3); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+    .brand-box { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; color: #d4af37; font-weight: 700; }
+    .logo-img { width: 55px; height: 55px; border-radius: 50%; border: 2px solid #d4af37; object-fit: cover; background: #fff; }
+    .badge-gold { background: linear-gradient(135deg, #d4af37, #f3e5ab); color: #0b1325; padding: 6px 18px; border-radius: 20px; font-weight: 800; font-size: 0.88rem; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+
+    /* Hero Banner */
+    .hero-banner { display: flex; align-items: center; gap: 30px; padding: 35px; background: rgba(255, 255, 255, 0.02); border-bottom: 1px solid rgba(212, 175, 55, 0.2); flex-wrap: wrap; }
+    .trainer-img { width: 160px; height: 190px; border-radius: 18px; border: 3px solid #d4af37; object-fit: cover; box-shadow: 0 12px 30px rgba(0,0,0,0.7); }
+    .hero-content { flex: 1; min-width: 280px; }
+    .hero-content h1 { font-size: 1.7rem; color: #fff; line-height: 1.4; margin-bottom: 12px; font-weight: 900; }
+    .hero-content p { color: #cbd5e1; font-size: 1rem; line-height: 1.7; }
+    .hero-content strong { color: #d4af37; }
+
+    /* Main Sections */
+    .section-block { padding: 35px; border-bottom: 1px dashed rgba(212, 175, 55, 0.25); }
+    .section-title { font-size: 1.35rem; color: #f3e5ab; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; border-right: 4px solid #d4af37; padding-right: 12px; }
+
+    /* Introduction Text */
+    .intro-text p { color: #e2e8f0; line-height: 1.8; font-size: 0.98rem; margin-bottom: 14px; }
+    
+    /* Prompts Tabs Navigation */
+    .prompt-tabs-nav { display: flex; gap: 8px; background: rgba(0, 0, 0, 0.5); padding: 8px; border-radius: 14px; border: 1px solid rgba(212, 175, 55, 0.3); overflow-x: auto; margin-bottom: 25px; }
+    .tab-btn { flex: 1; padding: 12px 16px; border: none; background: transparent; color: #94a3b8; font-weight: 700; font-size: 0.88rem; cursor: pointer; border-radius: 10px; transition: 0.3s; white-space: nowrap; }
+    .tab-btn:hover { color: #d4af37; background: rgba(212, 175, 55, 0.08); }
+    .tab-btn.active { color: #0b1325; background: linear-gradient(135deg, #d4af37, #f3e5ab); font-weight: 800; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3); }
+
+    /* Prompt Display Card */
+    .prompt-card { display: none; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 25px; }
+    .prompt-card.active { display: block; }
+    
+    .prompt-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+    .prompt-meta h3 { color: #d4af37; font-size: 1.15rem; }
+    .target-badge { background: rgba(212, 175, 55, 0.15); color: #f3e5ab; border: 1px solid rgba(212, 175, 55, 0.4); padding: 4px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; }
+
+    /* Prompt Code Box */
+    .prompt-box { background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 12px; padding: 20px; position: relative; margin: 18px 0; }
+    .prompt-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .prompt-header span { color: #d4af37; font-weight: 800; font-size: 0.9rem; }
+    .copy-btn { background: #d4af37; color: #0b1325; border: none; padding: 6px 16px; border-radius: 8px; font-weight: 800; font-size: 0.82rem; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3); }
+    .copy-btn:hover { background: #f3e5ab; transform: translateY(-1px); }
+    .prompt-content { color: #e2e8f0; font-size: 0.92rem; line-height: 1.8; white-space: pre-wrap; font-family: 'Cairo', sans-serif; }
+
+    .output-box { background: rgba(212, 175, 55, 0.05); border-right: 3px solid #d4af37; border-radius: 0 10px 10px 0; padding: 15px 20px; margin-top: 18px; }
+    .output-box h4 { color: #d4af37; font-size: 0.95rem; margin-bottom: 6px; }
+    .output-box p, .output-box ul { color: #cbd5e1; font-size: 0.88rem; line-height: 1.6; }
+
+    /* Structured Tables */
+    .custom-table { width: 100%; border-collapse: collapse; margin-top: 15px; border-radius: 12px; overflow: hidden; }
+    .custom-table th { background: rgba(212, 175, 55, 0.2); color: #f3e5ab; padding: 12px 15px; text-align: right; font-size: 0.92rem; border-bottom: 1px solid rgba(212, 175, 55, 0.4); }
+    .custom-table td { padding: 12px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #cbd5e1; font-size: 0.9rem; background: rgba(255, 255, 255, 0.01); }
+    .custom-table tr:hover td { background: rgba(212, 175, 55, 0.04); }
+
+    /* Quality Checklist Grid */
+    .checklist-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px; }
+    .check-item { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px; padding: 14px 18px; display: flex; align-items: center; gap: 12px; color: #cbd5e1; font-size: 0.9rem; }
+    .check-item span { color: #d4af37; font-weight: bold; font-size: 1.1rem; }
+
+    /* Final Message & Signature Footer */
+    .footer-signature { padding: 40px 35px; background: rgba(0, 0, 0, 0.5); text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.3); }
+    .final-quote { font-size: 1.05rem; color: #f3e5ab; line-height: 1.8; margin-bottom: 25px; max-width: 850px; margin-left: auto; margin-right: auto; font-style: italic; }
+    .signature-badge { display: inline-block; background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05)); border: 1px solid #d4af37; padding: 12px 30px; border-radius: 30px; color: #fff; font-size: 1.05rem; font-weight: 700; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+    .signature-badge strong { color: #d4af37; }
+  </style>
+</head>
+<body>
+
+<div class="doc-container">
+
+  <!-- Header Branding -->
+  <div class="header-branding">
+    <div class="brand-box">
+      <img src="logo1.jpg" alt="الاتحاد العام للقبائل" class="logo-img" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'55\' height=\'55\' viewBox=\'0 0 55 55\'><circle cx=\'27.5\' cy=\'27.5\' r=\'25\' fill=\'%23d4af37\'/><text x=\'50%\' y=\'55%\' font-size=\'9\' text-anchor=\'middle\' fill=\'%230b1325\' font-weight=\'bold\'>الاتحاد</text></svg>';">
+      <span>الاتحاد العام للقبائل المصرية والعربية</span>
+    </div>
+    <span class="badge-gold">دبلومة Smart TOT</span>
+    <div class="brand-box">
+      <span>مبادرة المدرب الموسوعي</span>
+      <img src="logo2.jpg" alt="المدرب الموسوعي" class="logo-img" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'55\' height=\'55\' viewBox=\'0 0 55 55\'><circle cx=\'27.5\' cy=\'27.5\' r=\'25\' fill=\'%231d4ed8\'/><text x=\'50%\' y=\'55%\' font-size=\'9\' text-anchor=\'middle\' fill=\'%23fff\' font-weight=\'bold\'>الموسوعي</text></svg>';">
+    </div>
+  </div>
+
+  <!-- Hero Banner -->
+  <div class="hero-banner">
+    <img src="trainer.jpg" alt="الأستاذ توفيق كنوش" class="trainer-img" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'160\' height=\'190\' viewBox=\'0 0 160 190\'><rect width=\'160\' height=\'190\' fill=\'%231e293b\'/><text x=\'50%\' y=\'50%\' font-size=\'13\' text-anchor=\'middle\' fill=\'%23d4af37\' font-weight=\'bold\'>أ. توفيق كنوش</text></svg>';">
+    <div class="hero-content">
+      <span class="badge-gold" style="margin-bottom:8px; display:inline-block;">نشاط تدريبي ومستند مرجعي</span>
+      <h1>من الفكرة إلى البرنامج التدريبي: خمسة أوامر مهنية لبناء الحقائب بالذكاء الاصطناعي و ADDIE</h1>
+      <p>ضمن ورشة: <strong>مشروع المدرب الذكي: بناء وتنفيذ حقيبة تدريبية متكاملة بالاعتماد على الذكاء الاصطناعي ومنهجية ADDIE</strong><br>
+      تقديم الأستاذ والمدرب: <strong>توفيق كنوش (الجزائر)</strong></p>
+    </div>
+  </div>
+
+  <!-- Section 1: Intro -->
+  <div class="section-block intro-text">
+    <h2 class="section-title">1. تمهيد والهدف العام من النشاط</h2>
+    <p>لم يعد توظيف الذكاء الاصطناعي في مجال التدريب مقتصرًا على كتابة النصوص أو إعداد العروض التقديمية؛ بل أصبح بإمكان المدرب الاستعانة به في تحليل الاحتياجات، وصياغة الأهداف، وتصميم المحتوى، وتنظيم الأنشطة، وبناء أدوات التقييم والمتابعة.</p>
+    <p>لكن جودة المخرجات لا تتوقف على الأداة المستخدمة بقدر ما تتوقف على جودة التوجيه الذي يقدمه المدرب، ومدى وضوح المهمة والسياق والمدخلات والقيود ومعايير التحقق.</p>
+    <p>من هنا تأتي أهمية <strong>الأمر المهني (Professional Prompt)</strong>، الذي لا يكتفي بطلب إجابة عامة، بل يحدد للذكاء الاصطناعي الدور المطلوب، والسياق التدريبي، والمهمة، والمدخلات، والقيود، وشكل المخرجات، ومعايير مراجعتها.</p>
+    <p style="color:#d4af37; font-weight:700;">🎯 الهدف العام للنشاط: تمكين المدرب من توظيف الأوامر المهنية في بناء برنامج تدريبي متكامل، انطلاقًا من احتياج محدد، وصولًا إلى تصميم الجلسات والأنشطة وأدوات التقييم والمتابعة.</p>
+    <p><strong>⚠️ قاعدة أساسية للتعليمات:</strong> اختر موضوعًا تدريبيًا حقيقيًا أو افتراضيًا، وحدد الفئة المستهدفة، ثم استخدم الأوامر الخمسة بالتتابع. <em>لا تنتقل إلى الأمر التالي قبل مراجعة مخرجات الأمر السابق واعتمادها أو تعديلها.</em></p>
+  </div>
+
+  <!-- Section 2: The 5 Prompts -->
+  <div class="section-block">
+    <h2 class="section-title">2. الأوامر المهنية الخمسة المترابطة (مرجع التطبيق)</h2>
+    
+    <!-- Prompts Tabs -->
+    <div class="prompt-tabs-nav">
+      <button class="tab-btn active" onclick="switchPromptTab(0)">1. تحديد الاحتياج والفكرة</button>
+      <button class="tab-btn" onclick="switchPromptTab(1)">2. صياغة الأهداف</button>
+      <button class="tab-btn" onclick="switchPromptTab(2)">3. تصميم البنية والمحتوى</button>
+      <button class="tab-btn" onclick="switchPromptTab(3)">4. تخطيط الجلسات والأنشطة</button>
+      <button class="tab-btn" onclick="switchPromptTab(4)">5. التقييم وقياس الأثر</button>
+    </div>
+
+    <!-- Tab 1 -->
+    <div class="prompt-card active">
+      <div class="prompt-meta">
+        <h3>الأمر المهني الأول: تحديد الاحتياج وصياغة فكرة البرنامج</h3>
+        <span class="target-badge">مرحلة التحليل (Analysis)</span>
+      </div>
+      <p><strong>الهدف:</strong> الانتقال من موضوع عام إلى فكرة برنامج تدريبي تستند إلى احتياج واضح لدى فئة مستهدفة محددة.</p>
+      
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span>📋 نص الأمر المهني للنسخ (Prompt 1)</span>
+          <button class="copy-btn" onclick="copyPromptText('pr1')">نسخ الأمر</button>
+        </div>
+        <div class="prompt-content" id="pr1">تصرّف بوصفك خبيرًا في تحليل الاحتياجات التدريبية وتصميم البرامج التدريبية.
+
+أريد مساعدتي في تحويل الموضوع التدريبي الآتي إلى فكرة برنامج تدريبي واضحة ومبررة:
+- الموضوع المقترح: [اكتب الموضوع].
+- الفئة المستهدفة: [حدد الفئة].
+- طبيعة عملها أو مهامها: [صف المهام].
+- المشكلات أو التحديات التي تواجهها: [اذكر التحديات].
+- السياق الذي سيُنفذ فيه التدريب: [المؤسسة أو القطاع أو البيئة المهنية].
+
+نفّذ المهمة وفق الخطوات الآتية:
+1. حلّل طبيعة الفئة المستهدفة ومهامها المهنية.
+2. استخرج الاحتياجات التدريبية المحتملة المرتبطة بالموضوع.
+3. ميّز بين الاحتياج التدريبي الفعلي والموضوع الذي قد يبدو جذابًا فقط.
+4. اقترح عنوانًا مهنيًا واضحًا للبرنامج.
+5. صغ وصفًا مختصرًا للبرنامج يوضح أهميته ومبرراته.
+6. حدّد الكفاية أو الكفايات المستهدفة بصورة أولية.
+7. وضّح النتائج المهنية المتوقع أن يحققها التدريب.
+
+ضوابط العمل:
+- لا تفترض أن الاحتياجات المحتملة تمثل نتائج تحليل احتياجات فعلي.
+- لا تخترع بيانات أو إحصاءات عن الفئة المستهدفة.
+- إذا كانت المعلومات غير كافية، حدّد ما ينقصك بدلًا من افتراضه.
+- ميّز بوضوح بين المعلومات المقدمة والاستنتاجات المقترحة.</div>
+      </div>
+      <div class="output-box">
+        <h4>📌 المخرج المتوقع:</h4>
+        <p>بطاقة تعريف أولية للبرنامج التدريبي تتضمن: (عنوان البرنامج، الفئة المستهدفة، مبررات التدريب، الاحتياج التدريبي، الكفايات المستهدفة، والنتائج المهنية المتوقعة).</p>
+      </div>
+    </div>
+
+    <!-- Tab 2 -->
+    <div class="prompt-card">
+      <div class="prompt-meta">
+        <h3>الأمر المهني الثاني: صياغة الأهداف التدريبية القابلة للقياس</h3>
+        <span class="target-badge">مرحلة التصميم (Design)</span>
+      </div>
+      <p><strong>الهدف:</strong> تحويل الاحتياج والكفايات المستهدفة إلى أهداف تدريبية واضحة يمكن ملاحظتها وقياس تحققها.</p>
+      
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span>📋 نص الأمر المهني للنسخ (Prompt 2)</span>
+          <button class="copy-btn" onclick="copyPromptText('pr2')">نسخ الأمر</button>
+        </div>
+        <div class="prompt-content" id="pr2">تصرّف بوصفك خبيرًا في هندسة الأهداف التعليمية والتدريبية والتصميم التعليمي وفق منهجية ADDIE.
+
+اعتمد على بطاقة البرنامج التدريبي التي أعددناها في المرحلة السابقة:
+[أدرج بطاقة البرنامج المعتمدة].
+
+قم بصياغة الأهداف التدريبية وفق الشروط الآتية:
+1. اربط كل هدف باحتياج تدريبي أو كفاية مستهدفة.
+2. استخدم أفعالًا سلوكية واضحة قابلة للملاحظة والقياس.
+3. تجنب الأفعال العامة غير القابلة للقياس، مثل: يعرف، يفهم، يلمّ، يدرك، ما لم تُترجم إلى أداء قابل للملاحظة.
+4. وزّع الأهداف على المجالات المعرفية والمهارية والوجدانية بحسب طبيعة البرنامج.
+5. حدّد لكل هدف شروط الأداء ومعيار النجاح المناسب عندما يكون ذلك ممكنًا.
+6. تحقق من واقعية الأهداف وتناسبها مع مدة البرنامج ومستوى المتدربين.
+
+اعرض النتائج في جدول يتضمن:
+- رقم الهدف.
+- صياغة الهدف التدريبي.
+- المجال المستهدف.
+- الكفاية أو الاحتياج المرتبط به.
+- دليل تحقق الهدف.
+- أداة التقييم المناسبة.
+
+ضوابط العمل:
+- لا تضع عددًا كبيرًا من الأهداف على حساب جودتها.
+- لا تصغ أهدافًا لا يمكن التحقق منها خلال البرنامج أو بعده.
+- لا تخلط بين هدف البرنامج العام والأهداف الإجرائية للجلسات.
+- نبّهني إلى أي هدف لا يرتبط باحتياج واضح.</div>
+      </div>
+      <div class="output-box">
+        <h4>📌 المخرج المتوقع:</h4>
+        <p>مصفوفة أهداف تدريبية تربط بين الاحتياجات والكفايات والأهداف وأدلة التحقق وأدوات التقييم.</p>
+      </div>
+    </div>
+
+    <!-- Tab 3 -->
+    <div class="prompt-card">
+      <div class="prompt-meta">
+        <h3>الأمر المهني الثالث: تصميم المحتوى والبنية التدريبية</h3>
+        <span class="target-badge">مرحلة التطوير (Development)</span>
+      </div>
+      <p><strong>الهدف:</strong> تحويل الأهداف التدريبية إلى وحدات ومحاور ومحتوى متدرج ومترابط، دون الخلط بين تصميم المحتوى وكتابة المحتوى التفصيلي.</p>
+      
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span>📋 نص الأمر المهني للنسخ (Prompt 3)</span>
+          <button class="copy-btn" onclick="copyPromptText('pr3')">نسخ الأمر</button>
+        </div>
+        <div class="prompt-content" id="pr3">تصرّف بوصفك خبيرًا في التصميم التعليمي وبناء الحقائب والبرامج التدريبية.
+
+اعتمد على بطاقة البرنامج ومصفوفة الأهداف التدريبية الآتيتين:
+[أدرج بطاقة البرنامج ومصفوفة الأهداف المعتمدتين].
+
+صمّم البنية التدريبية للبرنامج وفق التعليمات الآتية:
+1. قسّم البرنامج إلى وحدات أو محاور تدريبية متسلسلة منطقيًا.
+2. حدّد لكل وحدة أهدافها الإجرائية.
+3. استخرج الموضوعات والعناصر الأساسية التي يجب تناولها لتحقيق الأهداف.
+4. رتّب المحتوى من البسيط إلى المركب، ومن المعرفة إلى التطبيق، بحسب طبيعة الموضوع.
+5. اقترح لكل وحدة نشاطًا أو تطبيقًا عمليًا مناسبًا.
+6. حدّد الزمن المقترح لكل وحدة مع مراعاة الزمن الإجمالي للبرنامج.
+7. اربط كل موضوع بهدف تدريبي محدد، وتجنب إدراج معلومات لا تخدم الأهداف.
+8. اقترح الوسائل والموارد التدريبية اللازمة.
+
+اعرض النتائج في مصفوفة تتضمن:
+- الوحدة التدريبية.
+- الأهداف المرتبطة بها.
+- المحاور والعناصر الأساسية.
+- النشاط التطبيقي.
+- الوسائل والموارد.
+- الزمن المقترح.
+- دليل التعلم المتوقع.
+
+ضوابط العمل:
+- لا تكتب المحتوى التفصيلي للدروس في هذه المرحلة؛ المطلوب هو تصميم هيكل المحتوى.
+- لا تكرر الموضوع نفسه في وحدات متعددة دون مبرر.
+- لا تجعل كثرة المحاور معيارًا لجودة الحقيبة.
+- تحقق من وجود ارتباط واضح بين المحتوى والأهداف والأنشطة.</div>
+      </div>
+      <div class="output-box">
+        <h4>📌 المخرج المتوقع:</h4>
+        <p>خريطة المحتوى التدريبي، ومصفوفة الوحدات والمحاور والأهداف والأنشطة والأزمنة.</p>
+      </div>
+    </div>
+
+    <!-- Tab 4 -->
+    <div class="prompt-card">
+      <div class="prompt-meta">
+        <h3>الأمر المهني الرابع: تخطيط الجلسات والأنشطة التدريبية</h3>
+        <span class="target-badge">مرحلة التنفيذ (Execution)</span>
+      </div>
+      <p><strong>الهدف:</strong> تحويل تصميم البرنامج إلى خطة تنفيذية تساعد المدرب على إدارة الجلسات والوقت والتفاعل والتعلم.</p>
+      
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span>📋 نص الأمر المهني للنسخ (Prompt 4)</span>
+          <button class="copy-btn" onclick="copyPromptText('pr4')">نسخ الأمر</button>
+        </div>
+        <div class="prompt-content" id="pr4">تصرّف بوصفك خبيرًا في إدارة الجلسات التدريبية وتصميم الأنشطة والتعلم النشط.
+
+اعتمد على خريطة المحتوى التدريبي المعتمدة:
+[أدرج خريطة المحتوى].
+
+أعد خطة تنفيذية للجلسات التدريبية وفق المعايير الآتية:
+1. قسّم الوحدات إلى جلسات مناسبة للمدة الإجمالية للبرنامج.
+2. حدّد الهدف الإجرائي لكل جلسة.
+3. رتّب مراحل الجلسة من التهيئة إلى العرض والتطبيق والتقويم والغلق.
+4. اقترح أنشطة متنوعة تناسب طبيعة الهدف والفئة المستهدفة.
+5. حدّد دور المدرب ودور المتدرب في كل نشاط.
+6. اقترح الأدوات الرقمية أو التقليدية المناسبة للتنفيذ.
+7. حدّد الزمن اللازم لكل مرحلة ونشاط.
+8. وضّح طريقة الانتقال بين الأنشطة وكيفية إدارة التفاعل.
+9. اقترح بديلًا مناسبًا إذا تعذر تنفيذ نشاط أو استخدام أداة معينة.
+
+اعرض الخطة في جدول يتضمن:
+- الجلسة.
+- الهدف الإجرائي.
+- مراحل التنفيذ.
+- نشاط المدرب.
+- نشاط المتدرب.
+- الوسائل والأدوات.
+- الزمن.
+- أسلوب التحقق من التعلم.
+
+ضوابط العمل:
+- اجعل الأنشطة مرتبطة بالأهداف، لا مجرد فقرات ترفيهية.
+- راعِ الفروق الفردية ومستوى المتدربين.
+- لا تتجاوز الزمن الإجمالي المحدد.
+- لا تقترح أداة رقمية دون توضيح الغرض من استخدامها.
+- اجعل التطبيق العملي حاضرًا بقدر ما تسمح به طبيعة البرنامج.</div>
+      </div>
+      <div class="output-box">
+        <h4>📌 المخرج المتوقع:</h4>
+        <p>خطة تنفيذية للجلسات التدريبية تتضمن تسلسل الأنشطة، والأدوار، والأدوات، والأزمنة، وأساليب التحقق من التعلم.</p>
+      </div>
+    </div>
+
+    <!-- Tab 5 -->
+    <div class="prompt-card">
+      <div class="prompt-meta">
+        <h3>الأمر المهني الخامس: بناء منظومة التقييم والمتابعة</h3>
+        <span class="target-badge">مرحلة التقييم (Evaluation & ROI)</span>
+      </div>
+      <p><strong>الهدف:</strong> التحقق من تحقق الأهداف التدريبية، وتقدير أثر التدريب، وتحديد فرص التحسين والمتابعة.</p>
+      
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span>📋 نص الأمر المهني للنسخ (Prompt 5)</span>
+          <button class="copy-btn" onclick="copyPromptText('pr5')">نسخ الأمر</button>
+        </div>
+        <div class="prompt-content" id="pr5">تصرّف بوصفك خبيرًا في تقييم البرامج التدريبية وقياس أثر التعلم وتحسين الأداء.
+
+اعتمد على بطاقة البرنامج ومصفوفة الأهداف وخطة الجلسات والأنشطة التي أعددناها في المراحل السابقة:
+[أدرج المخرجات المعتمدة].
+
+صمّم منظومة تقييم متكاملة تتضمن المستويات الآتية:
+1. التقييم القبلي: تحديد مستوى المتدربين قبل التدريب، بما يتناسب مع الأهداف.
+2. التقييم التكويني: متابعة التعلم أثناء الجلسات من خلال الأسئلة والتمارين والملاحظات والمهام التطبيقية.
+3. التقييم البعدي: التحقق من مدى تحقق الأهداف بعد انتهاء التدريب.
+4. تقييم تجربة التدريب: قياس رضا المتدربين عن المحتوى والمدرب والأنشطة والتنظيم.
+5. متابعة التطبيق: اقتراح وسيلة مناسبة للتحقق من نقل المهارات المكتسبة إلى بيئة العمل بعد التدريب.
+
+أنشئ مصفوفة تقييم تتضمن:
+- الهدف التدريبي.
+- نوع التقييم.
+- المؤشر أو الأداء المستهدف.
+- أداة التقييم.
+- توقيت التطبيق.
+- معيار النجاح.
+- الدليل المطلوب.
+
+ثم اقترح:
+- نموذجًا مختصرًا للاختبار القبلي والبعدي.
+- نموذجًا لتقييم تجربة التدريب.
+- بطاقة متابعة لتطبيق المهارات في بيئة العمل.
+- تقريرًا مختصرًا يوضح كيفية الاستفادة من نتائج التقييم في تحسين البرنامج.
+
+ضوابط العمل:
+- اجعل كل أداة تقييم مرتبطة بهدف محدد.
+- لا تخلط بين رضا المتدرب وتحقق التعلم.
+- لا تعتبر ارتفاع نتائج الاختبار وحده دليلًا كافيًا على تحسن الأداء المهني.
+- لا تدّعِ قياس أثر التدريب في بيئة العمل دون جمع أدلة مناسبة.
+- ميّز بين النتائج الفعلية والتوقعات والمقترحات.</div>
+      </div>
+      <div class="output-box">
+        <h4>📌 المخرج المتوقع:</h4>
+        <p>منظومة تقييم ومتابعة تتضمن أدوات القياس ومؤشرات النجاح وأدلة التحقق وآلية التحسين المستمر.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Summary Table -->
+  <div class="section-block">
+    <h2 class="section-title">3. الحصيلة النهائية للنشاط (جدول المخرجات)</h2>
+    <p>بعد تنفيذ الأوامر الخمسة ومراجعة مخرجاتها، يكون المدرب قد أنجز مسارًا أوليًا لبناء برنامج تدريبي متكامل:</p>
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>المرحلة</th>
+          <th>المخرج الأساسي</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. تحديد الاحتياج</strong></td>
+          <td>بطاقة تعريف البرنامج ومبرراته</td>
+        </tr>
+        <tr>
+          <td><strong>2. صياغة الأهداف</strong></td>
+          <td>مصفوفة الأهداف القابلة للقياس</td>
+        </tr>
+        <tr>
+          <td><strong>3. تصميم المحتوى</strong></td>
+          <td>خريطة الوحدات والمحاور التدريبية</td>
+        </tr>
+        <tr>
+          <td><strong>4. تخطيط التنفيذ</strong></td>
+          <td>خطة الجلسات والأنشطة والأزمنة</td>
+        </tr>
+        <tr>
+          <td><strong>5. التقييم والمتابعة</strong></td>
+          <td>منظومة التقييم وقياس التعلم والتحسين</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 4: Quality Check Cards -->
+  <div class="section-block">
+    <h2 class="section-title">4. بطاقة مراجعة جودة المخرجات (قبل اعتماد الحقيبة)</h2>
+    <div class="checklist-grid">
+      <div class="check-item"><span>✔</span> هل انطلق البرنامج من احتياج تدريبي واضح؟</div>
+      <div class="check-item"><span>✔</span> هل ترتبط الأهداف بالكفايات والاحتياجات؟</div>
+      <div class="check-item"><span>✔</span> هل الأهداف قابلة للملاحظة والقياس؟</div>
+      <div class="check-item"><span>✔</span> هل يخدم المحتوى تحقيق الأهداف؟</div>
+      <div class="check-item"><span>✔</span> هل الأنشطة مناسبة لطبيعة المحتوى والفئة؟</div>
+      <div class="check-item"><span>✔</span> هل الزمن واقعي وقابل للتنفيذ؟</div>
+      <div class="check-item"><span>✔</span> هل أدوات التقييم تقيس صلب الأهداف؟</div>
+      <div class="check-item"><span>✔</span> هل توجد أدلة مرجعية للتحقق من التعلم؟</div>
+    </div>
+  </div>
+
+  <!-- Final Footer & Signature -->
+  <div class="footer-signature">
+    <p class="final-quote">
+      "الذكاء الاصطناعي يستطيع أن يقترح ويحلل وينظم ويطوّر المسودات، لكنه لا يمتلك وحده معرفة السياق المهني الحقيقي للمتدربين، ولا يتحمل مسؤولية اعتماد البرنامج أو نتائجه. 
+      <strong>المدرب الذكي لا يكتفي بطرح سؤال على الذكاء الاصطناعي؛ بل يعرف ماذا يطلب، ولماذا يطلبه، وكيف يراجع ما يحصل عليه، ومتى يعتمد المخرجات.</strong>"
+    </p>
+    <div class="signature-badge">
+      من إعداد المدرب: <strong>الأستاذ توفيق كنوش</strong> (بالاستعانة بالذكاء الاصطناعي)
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function switchPromptTab(index) {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const cards = document.querySelectorAll('.prompt-card');
+    tabs.forEach((tab, i) => tab.classList.toggle('active', i === index));
+    cards.forEach((card, i) => card.classList.toggle('active', i === index));
+  }
+
+  function copyPromptText(elementId) {
+    const text = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('تم نسخ نص الأمر المهني بنجاح!');
+    });
+  }
+</script>
+
+</body>
+</html>
